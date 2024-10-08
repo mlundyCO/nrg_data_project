@@ -42,8 +42,11 @@ p <- ggplot(interchange_mw_sum_by_hour, aes(x = DateTime, y = Interchange_MW)) +
        x = "Hour",
        y = "Hourly Sum of Interchange MW") +
   theme_minimal()
+  theme(panel.background = element_rect(fill = "white", color = "white"),
+        plot.background = element_rect(fill = "white", color = "white"))
 
-ggsave("interchange_MW_time_series.png", plot = p, width = 12, height = 6)
+
+ggsave("interchange_MW_time_series.png", plot = p, width = 12, height = 6, bg = "white")
 
 # *******************************************************************
 
