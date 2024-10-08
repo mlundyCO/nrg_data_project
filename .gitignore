@@ -51,3 +51,6 @@ rsconnect/
 # CSV data
 *.csv
 *.csv.bak
+
+# venvs
+venv/
