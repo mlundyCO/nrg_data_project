@@ -2,8 +2,20 @@ pdf(NULL) # So Rscript won't produce duplicate plots
 
 library(ggplot2)
 
+# Get command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+# Check if the filename argument was provided
+if (length(args) == 0) {
+    stop("No filename provided. Please provide a CSV filename as a command-line argument.")
+}
+
+# Use the first argument as the filename
+filename <- args[1]
+
+# Read the CSV file
 # Data description: https://www.eia.gov/electricity/gridmonitor/about
-interchange_data <- read.csv("EIA930_INTERCHANGE_2023_Jan_Jun.csv")
+interchange_data <- read.csv(filename)
 
 # Print summary of the data
 #print(summary(interchange_data))
@@ -25,14 +37,13 @@ dev.off()
 
 # Idea: Sum the Interchange_MW over all BAs each hour,
 #   then plot the sums as a function of time.
-interchange_mw_sum_by_hour <- aggregate(Interchange_MW ~ Data_Date + Hour_Number,
+interchange_mw_sum_by_hour <- aggregate(Interchange_MW ~ UTC_Time_at_End_of_Hour,
                                         data = interchange_data, sum)
 
 # Massage date-time
 interchange_mw_sum_by_hour$DateTime <- as.POSIXct(
-  paste(interchange_mw_sum_by_hour$Data_Date, 
-        interchange_mw_sum_by_hour$Hour_Number - 1), 
-  format = "%m/%d/%Y %H"
+  interchange_mw_sum_by_hour$UTC_Time_at_End_of_Hour,
+  format = "%m/%d/%Y %H:%M:%S %p"
 )
 
 # Plot time series of summed interchange values
