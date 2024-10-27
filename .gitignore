@@ -48,9 +48,10 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# CSV data
+# Data
 *.csv
-*.csv.bak
+*.csv.clean
+*.xlsx*
 
 # venvs
 venv/

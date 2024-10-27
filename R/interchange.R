@@ -1,24 +1,29 @@
+here::i_am("R/interchange.R")
 pdf(NULL) # So Rscript won't produce duplicate plots
 
 library(ggplot2)
+library(readr)
+library(here)
 
 # Get command-line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
 # Check if the filename argument was provided
 if (length(args) == 0) {
-    stop("No filename provided. Please provide a CSV filename as a command-line argument.")
+    stop("No year provided. Please provide a year as a command-line argument.")
 }
 
 # Use the first argument as the filename
-filename <- args[1]
+year <- args[1]
+file <- paste0("EIA930_INTERCHANGE_", year, "_Jan_Jun.csv.clean")
+filename <- here("data", file)
 
 # Read the CSV file
 # Data description: https://www.eia.gov/electricity/gridmonitor/about
 interchange_data <- read.csv(filename)
 
 # Print summary of the data
-#print(summary(interchange_data))
+# print(summary(interchange_data))
 
 # *******************************************************************
 
@@ -28,7 +33,7 @@ middle_data <- interchange_data$Interchange_MW[
 middle_hist <- hist(middle_data, breaks = seq(from = -200.5, to = 200.5, by = 1))
 
 # Save the histogram plot
-png("middle_histogram.png")
+png(here("fig","middle_histogram.png"))
 plot(middle_hist, main = "Histogram of Interchange MW (-200 to 200)",
      xlab = "Interchange MW", ylab = "Frequency", col = "skyblue")
 dev.off()
@@ -52,12 +57,12 @@ p <- ggplot(interchange_mw_sum_by_hour, aes(x = DateTime, y = Interchange_MW)) +
   labs(title = "Hourly Sum of Interchange MW Over Time",
        x = "Hour",
        y = "Hourly Sum of Interchange MW") +
-  theme_minimal()
+  theme_minimal() +
   theme(panel.background = element_rect(fill = "white", color = "white"),
         plot.background = element_rect(fill = "white", color = "white"))
 
 
-ggsave("interchange_MW_time_series.png", plot = p, width = 12, height = 6, bg = "white")
+ggsave(here("fig","interchange_MW_time_series.png"), plot = p, width = 12, height = 6, bg = "white")
 
 # *******************************************************************
 
@@ -81,7 +86,7 @@ count <- hist(interchange_data$Interchange_MW, breaks = 250)
 log_counts <- log1p(count$counts)
 
 # Save the log-scale plot
-png("log_scaled_histogram.png")
+png(here("fig","log_scaled_histogram.png"))
 plot(count$mids, log_counts, type = "h",
      main = "Log-Scaled Histogram of Interchange MW",
      xlab = "Interchange MW", ylab = "Log(1 + Frequency)",
@@ -89,9 +94,3 @@ plot(count$mids, log_counts, type = "h",
 dev.off()
 
 # *******************************************************************
-
-
-# Display files if uncommented
-# system("xdg-open middle_histogram.png")
-# system("xdg-open interchange_MW_time_series.png")
-# system("xdg-open log_scaled_histogram.png")

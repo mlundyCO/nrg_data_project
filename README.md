@@ -7,7 +7,7 @@ Below are some preliminary visualizations and observations derived from the data
 ## 1. Histogram of Interchange MW (-200 to 200)
 The first and third quantiles of the Interchange MW data are approximately -200 and 200, so we plot a histogram in that range.
 
-![Histogram](middle_histogram.png)
+![Histogram](fig/middle_histogram.png)
 
 
 
@@ -16,7 +16,7 @@ The most common data point is zero (by a factor of ~5)! Frequencies decay rapidl
 
 ## 2. Log-Scaled Histogram of Interchange MW
 We use a log-scaled histogram to understand the stucture of the data away from zero.
-![Log-Scaled Histogram](log_scaled_histogram.png)
+![Log-Scaled Histogram](fig/log_scaled_histogram.png)
 
 **Results:**  
 The counts indeed decay exponentially, as expected, with a notable "shelf" on the right side between 5,000 and 10,000 MW. This could suggest some extreme values in the dataset, potentially warranting further investigation.
@@ -24,7 +24,7 @@ The counts indeed decay exponentially, as expected, with a notable "shelf" on th
 ## 3. Time Series of Hourly Sum of Interchange MW
 If the data were perfect, summing over every Interchange MW entry for the same hour should net to zero, because if A reports an average of 10 MW flowing to B, then B should report an average of -10 MW flowing to A, resulting in a net of zero. So we sum all entries for each hour, and then plot the time series for the entire six months.
 
-![Time Series](interchange_MW_time_series.png)
+![Time Series](fig/interchange_MW_time_series.png)
 
 **Results:**  
 The sums as a function of time appear quite random. The data are far from perfect, noting hourly sums at large as +/- 10,000 MW. But when compared to the approximately 1.3 million MW generation capacity of the US grid, these errors are on the order of one percent.
