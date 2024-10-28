@@ -129,3 +129,8 @@ class EIA930Grid(nx.Graph):
     ----------
     incoming_EIA_graph : an EIA930Year or EIA930Hour graph object
     """
+    def __init__(self, incoming_graph=None):
+        if incoming_graph is not None:
+            super().__init__(incoming_graph.edges())
+        else:
+            super().__init__()
