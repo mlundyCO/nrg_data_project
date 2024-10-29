@@ -1,4 +1,4 @@
-import EIA930Graphs as eg
+import EIA930GraphBuilder as eg
 import sys
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -31,9 +31,10 @@ files = assign_paths_filenames()
     # TODO: Stitch two 6-month files together
 interchange_df = pd.read_csv(files["interchange_filepath"])
 balance_df = pd.read_csv(files["balance_filepath"])
-# Uses custom EIA930Graphs classes
-G = eg.EIA930Year(interchange_df, balance_df)
-simple_G = eg.EIA930Grid(G)
+# Uses custom EIA930GraphBuilder class
+builder = eg.EIA930GraphBuilder(interchange_df, balance_df)
+G = builder.build_multi_digraph()
+simple_G = builder.build_grid_graph()
 
 def find_max_deg_nodes(degreeView):
     # Find the nodes of maximum degree
@@ -82,6 +83,8 @@ def find_cliques(Graph):
 
 find_cliques(simple_G)
 
+embed()
+# TODO: use kcore to look at cut verticies again
 # TODO: look into pricing data https://www.eia.gov/electricity/wholesalemarkets/
 # TODO: find the most altruistic BA
 # TODO: reproduce R time series results by creating subgraphs on timestamps and summing edge weights

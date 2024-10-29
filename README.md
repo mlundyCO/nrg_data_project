@@ -1,7 +1,7 @@
 # EIA930 Interchange and Balance Data
 This project aims to provide tools for the collection and manipulation of EIA930 Interchange and Balance data using graph theoretic techiques and the Python [NetworkX](https://networkx.org/) library, and then use those tools to analyze the data in a reproducible way.
 
-The main tools developed so far are: `data/get_clean_data.sh`, which downloads, creates backups, and cleans EIA930 Balance and Interchange data for a given year; `py/EIA930Graphs.py`, which implements NetworkX graph subclasses instantiated from Balance and Interchange data with useful timestamped generation and interchange attributes.
+The main tools developed so far are: `data/get_clean_data.sh`, which downloads, creates backups, and cleans EIA930 Balance and Interchange data for a given year; `py/EIA930GraphBuilder.py`, which implements helper functions to instantiate EIA930 interchange and balance data as various NetworkX graphs with useful timestamped generation and interchange attributes.
 
 Steps to reproduce the analysis can be found in `reproduction_steps.md`.
 
