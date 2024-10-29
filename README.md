@@ -56,4 +56,4 @@ Other interesting graph properties include:
 ---
 
 ### Next steps
-Further investigation of the interchange and generation data at individual timestamps is required. Using graph techniques may reveal more structure to the data. The AC-DC-AC ties should be investigated further. The results derived in R should be reproduced using the `EIA930Graphs` classes in Python.
+Further investigation of the interchange and generation data at individual timestamps is required. Using graph techniques may reveal more structure to the data. The AC-DC-AC ties should be investigated further. The results derived in R should be reproduced using the `EIA930GraphBuilder` class in Python.
