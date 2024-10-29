@@ -37,7 +37,7 @@ The sums as a function of time appear quite random. The data are far from perfec
 
 
 ## Grid Analysis
-We can use the timestamped edge data to contruct the simple undirected graph which shows available interconnections between Balancing Authorities (see the `EIA930Grid` class in `py/EIA930Graphs.py`). The actual interconnections are more complicated than "BA AECI is connected to BA MISO", but examining the graph could provide useful initial insights.
+We can use the timestamped edge data to contruct the simple undirected graph which shows available interconnections between Balancing Authorities (see the `build_grid_graph()` method in `py/EIA930GraphBuilder.py`). The actual interconnections are more complicated than "BA AECI is connected to BA MISO", but examining the graph could provide useful initial insights.
 
 The EIA produces a "grid monitor" tool which formats the nodes and edges on a map of the lower 48 states:
 ![EIA graph](fig/eia_grid_monitor.png)
